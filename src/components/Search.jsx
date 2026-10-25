@@ -1,16 +1,17 @@
+
 import { useEffect, useState } from "react";
 
-const URL = "https://api.spoonacular.com/recipes/complexSearch";
-const API_KEY = "9a145859fe6e4a77b35c7e0306bd75f9";
+const URL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+const API_KEY = "";
 
 export default function Search({ foodData, SetFoodData }) {
   const [query, Setquery] = useState("pizza");
   useEffect(() => {
     async function fetchFood() {
-      const res = await fetch(`${URL}?query=${query}&apiKey=${API_KEY}`);
+      const res = await fetch(`${URL}${query}`);
       const data = await res.json();
-      console.log(data.results);
-      SetFoodData(data.results)
+      console.log(data.meals);
+      SetFoodData(data.meals);
     }
     fetchFood();
   }, [query]);
